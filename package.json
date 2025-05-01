@@ -1,0 +1,21 @@
+{
+  "name": "details-dropdown-block-ud",
+  "version": "1.0.0",
+  "description": "Ein Gutenberg-Block für aufklappbare Details mit PDF- und Link-Optionen, entwickelt von ulrich.digital.",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "author": "ulrich.digital",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^30.15.0"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@wordpress/icons": "^10.22.0"
+  }
+}

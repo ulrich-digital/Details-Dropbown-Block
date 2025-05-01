@@ -1,0 +1,144 @@
+/* =============================================================== *\ 
+    Details Dropdown: Grundstruktur
+\* =============================================================== */
+
+.details-dropdown-frontend {
+    /* Gesamt-Container kann eigene Styles erhalten, falls nötig */
+}
+
+.details-dropdown-frontend .details-toggle {
+    cursor: pointer;
+}
+.details-dropdown-frontend .details-toggle-text{
+background-color: #F5F5F5;
+border-radius: 100px;
+padding: 4px 12px;
+border: 1.5px solid #F5F5F5;
+transition: all .2s;
+font-size: 75%;
+display: inline-block;
+}
+
+.details-dropdown-frontend .details-toggle-text::after{
+    font-family: "Font Awesome 6 Sharp";
+    content: "\f178"; 
+    margin-left: 0.5em;
+    font-weight: 900;
+    font-size: 0.9em;
+	display: inline-block;
+	transition: all .2s;
+}
+
+.details-dropdown-frontend .details-toggle-text:hover{
+	color: var(--wp--preset--color--highlight-700);
+	background-color: var(--wp--preset--color--highlight-100);
+	border-color:  var(--wp--preset--color--highlight-100);
+}
+
+.details-dropdown-frontend .open .details-toggle-text{
+	color: var(--wp--preset--color--highlight-700);
+	border-color: var(--wp--preset--color--highlight-100);
+	background-color: var(--wp--preset--color--highlight-100);
+}
+
+
+.details-dropdown-frontend .open .details-toggle-text::after{
+transform: rotate(90deg);
+}
+
+
+.details-dropdown-frontend .details-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.02s ease-in-out;
+}
+
+
+
+/* =============================================================== *\ 
+   Details Content: Liste und Elemente
+\* =============================================================== */
+
+/* UL - Die Linkliste */
+.details-dropdown-frontend .details-content ul {
+    margin: 0 0 1px;
+    padding: 0.75em 0 0;
+    list-style: none;
+    display: flex;       
+    flex-wrap: wrap;  
+	align-items: center;
+    gap: 0.25em 0.5em;         
+}
+
+/* LI - Einzelne Listenelemente */
+.details-dropdown-frontend .details-content li {
+    margin: 0; /* Flex übernimmt den Abstand */
+}
+
+
+/* =============================================================== *\ 
+   Details Content: Basis für Links
+\* =============================================================== */
+
+.details-dropdown-frontend .details-content a {
+    font-size: 0.75em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+/* =============================================================== *\ 
+   Details Content: Spezifische Linktypen
+\* =============================================================== */
+
+/* Interne Links + PDFs: Grüner Button-Stil */
+.details-dropdown-frontend .details-content a.link--internal,
+.details-dropdown-frontend .details-content a.link--pdf {
+    border: 1.5px solid var(--wp--preset--color--highlight-500);
+    border-radius: 100px;
+    font-size: 0.75em;
+    padding: 4px 12px;
+    font-weight: 500;
+    transition: all .1s;
+    border-color: var(--wp--preset--color--highlight-100);
+    background: var(--wp--preset--color--highlight-100);
+    color: var(--wp--preset--color--highlight-700);
+}
+
+.details-dropdown-frontend .details-content a.link--internal:hover, 
+.details-dropdown-frontend .details-content a.link--pdf:hover{
+box-shadow: 1px 1px 6px #00000033;
+transform: translate(0px, 0px);
+border-color: var(--wp--preset--color--highlight-500);
+}
+
+/* =============================================================== *\ 
+   Details Content: Icons nach Linktyp
+\* =============================================================== */
+
+/* PDF Icon */
+.details-dropdown-frontend .details-content a.link--pdf::after {
+    font-family: "Font Awesome 6 Sharp";
+    content: "\f1c1"; /* Unicode für PDF */
+    margin-left: 0.5em;
+    font-weight: 900;
+    font-size: 0.9em;
+}
+
+/* Internes Link-Icon NUR wenn KEIN PDF */
+.details-dropdown-frontend .details-content a.link--internal:not(.link--pdf)::after {
+    font-family: "Font Awesome 6 Sharp";
+    content: "\e09f"; /* Unicode für Intern */
+    margin-left: 0.5em;
+    font-weight: 900;
+}
+
+/* Externes Link-Icon */
+.details-dropdown-frontend .details-content a.link--external::after {
+    font-family: "Font Awesome 6 Sharp";
+    content: "\f35d"; /* Unicode für Extern */
+    margin-left: 0.5em;
+    font-weight: 900;
+    font-size: 0.9em;
+}
