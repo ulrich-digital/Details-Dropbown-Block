@@ -1,0 +1,167 @@
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/css/frontend.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* =============================================================== *\ 
+    Details Dropdown: Grundstruktur
+\* =============================================================== */
+.details-dropdown-frontend {
+  display: none;
+}
+
+.details-dropdown-frontend.is-visible {
+  display: block;
+}
+
+.details-dropdown-frontend .details-toggle {
+  cursor: pointer;
+}
+
+.details-dropdown-frontend .details-toggle-text {
+  background-color: #f5f5f5;
+  border-radius: 100px;
+  padding: 4px 12px;
+  border: 1.5px solid #f5f5f5;
+  transition: all 0.2s;
+  font-size: 75%;
+  display: inline-block;
+}
+
+.details-dropdown-frontend .details-toggle-text::after {
+  font-family: "Font Awesome 6 Sharp";
+  content: "\f178";
+  margin-right: 0.5em;
+  font-weight: 900;
+  font-size: 0.9em;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.details-dropdown-frontend .details-toggle-text:hover {
+  color: var(--wp--preset--color--highlight-700);
+  background-color: var(--wp--preset--color--highlight-100);
+  border-color: var(--wp--preset--color--highlight-100);
+}
+
+.details-dropdown-frontend .open .details-toggle-text {
+  color: var(--wp--preset--color--highlight-700);
+  border-color: var(--wp--preset--color--highlight-100);
+  background-color: var(--wp--preset--color--highlight-100);
+}
+
+.details-dropdown-frontend .open .details-toggle-text::after {
+  transform: rotate(-90deg);
+}
+
+.details-dropdown-frontend .details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.details-dropdown-frontend .details-content.is-open {
+  margin-top: 1em;
+}
+
+/* =============================================================== *\ 
+   Details Content: Liste und Elemente
+\* =============================================================== */
+.details-dropdown-frontend .details-content h1,
+.details-dropdown-frontend .details-content h2,
+.details-dropdown-frontend .details-content h3,
+.details-dropdown-frontend .details-content h4,
+.details-dropdown-frontend .details-content h5,
+.details-dropdown-frontend .details-content h6 {
+  font-size: 100%;
+}
+
+.details-dropdown-frontend .details-content .details-richtext-content > * {
+  font-size: 75%;
+}
+
+.details-dropdown-frontend .details-content ul.wp-block-list {
+  list-style: disc;
+  margin-right: 20px;
+}
+
+/* UL - Die Linkliste */
+.details-dropdown-frontend .details-content ul.linkliste {
+  margin: 0 0 1px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em 0.5em;
+}
+
+/* LI - Einzelne Listenelemente */
+.details-dropdown-frontend .details-content li.linkliste {
+  margin: 0; /* Flex übernimmt den Abstand */
+}
+
+/* =============================================================== *\ 
+   Details Content: Basis für Links
+\* =============================================================== */
+.details-dropdown-frontend .details-content a {
+  font-size: 0.75em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* =============================================================== *\ 
+   Details Content: Spezifische Linktypen
+\* =============================================================== */
+/* Interne Links + PDFs: Grüner Button-Stil */
+.details-dropdown-frontend .details-content a.link--internal,
+.details-dropdown-frontend .details-content a.link--pdf {
+  border: 1.5px solid var(--wp--preset--color--highlight-500);
+  border-radius: 100px;
+  font-size: 0.75em;
+  padding: 4px 12px;
+  font-weight: 500;
+  transition: all 0.1s;
+  border-color: var(--wp--preset--color--highlight-100);
+  background: var(--wp--preset--color--highlight-100);
+  color: var(--wp--preset--color--highlight-700);
+}
+
+.details-dropdown-frontend .details-content a.link--internal:hover,
+.details-dropdown-frontend .details-content a.link--pdf:hover {
+  box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.2);
+  transform: translate(0px, 0px);
+  border-color: var(--wp--preset--color--highlight-500);
+}
+
+/* =============================================================== *\ 
+   Details Content: Icons nach Linktyp
+\* =============================================================== */
+/* PDF Icon */
+.details-dropdown-frontend .details-content a.link--pdf::after {
+  font-family: "Font Awesome 6 Sharp";
+  content: "\f1c1"; /* Unicode für PDF */
+  margin-right: 0.5em;
+  font-weight: 900;
+  font-size: 0.9em;
+}
+
+/* Internes Link-Icon NUR wenn KEIN PDF */
+.details-dropdown-frontend .details-content a.link--internal:not(.link--pdf)::after {
+  font-family: "Font Awesome 6 Sharp";
+  content: "\e09f"; /* Unicode für Intern */
+  margin-right: 0.5em;
+  font-weight: 900;
+}
+
+/* Externes Link-Icon */
+.details-dropdown-frontend .details-content a.link--external::after {
+  font-family: "Font Awesome 6 Sharp";
+  content: "\f35d"; /* Unicode für Extern */
+  margin-right: 0.5em;
+  font-weight: 900;
+  font-size: 0.9em;
+}

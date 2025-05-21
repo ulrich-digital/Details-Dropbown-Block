@@ -1,0 +1,211 @@
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/css/editor.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* Basis-Variablen */
+.details-dropdown-editor {
+  --details-border-radius: 4px;
+  --details-color-blue: var(--wp-admin-theme-color, #3858e9);
+  --details-color-red: var(--wp--preset--color--vivid-red, #d63638);
+  --details-border-color: #ccc;
+  --details-border-color-light: #111111;
+  --details-font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: var(--details-font-family);
+  padding: 20px 10px 0.5em 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Einzelnes Item */
+.details-dropdown-editor .details-item {
+  background: #fff;
+  border: 1px solid var(--details-border-color);
+  border-radius: var(--details-border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Felder im Item */
+.details-dropdown-editor .details-item-field {
+  margin-top: 0px;
+}
+
+/* Feld-Label */
+.details-dropdown-editor .details-field-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #39414d;
+}
+
+/* Upload + Eingabe Felder nebeneinander */
+.details-dropdown-editor .details-item-fields {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+
+/* Textfeld (Pfad/URL) */
+.details-dropdown-editor .details-textcontrol {
+  flex-grow: 1;
+}
+
+/* Upload-Button */
+.details-dropdown-editor .details-upload-button {
+  flex-shrink: 0;
+  margin-bottom: 6px;
+  border-radius: var(--details-border-radius);
+}
+
+/* LinkControl Wrapper */
+.details-dropdown-editor .details-link-control-wrapper {
+  margin-bottom: 16px;
+}
+
+/* LinkControl Input korrekt darstellen */
+.details-dropdown-editor .details-link-control-wrapper .components-base-control {
+  margin: 0;
+}
+
+/* Gesamten "Erweitert" Teil ausblenden */
+.details-dropdown-editor .details-link-control-wrapper .block-editor-link-control__tools {
+  display: none;
+}
+
+/* LinkControl Buttons (Abbrechen/Speichern) verstecken */
+.details-dropdown-editor .details-link-control-wrapper .components-flex.components-h-stack.block-editor-link-control__search-actions {
+  display: none;
+}
+
+/* Sucheingabe deaktivieren */
+.details-dropdown-editor .details-link-control-wrapper .block-editor-link-control__tools {
+  /* display: none;*/
+}
+
+/* LinkControl Fokus entfernen */
+.details-dropdown-editor .details-link-control-wrapper .components-button:focus:not(:disabled) {
+  box-shadow: none;
+  outline: none;
+}
+
+/* LinkControl "Erweitert"-Bereich immer geöffnet */
+.details-dropdown-editor .block-editor-link-control__drawer {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+}
+
+/* "Erweitert" Button (Pfeil und Text) ausblenden */
+.details-dropdown-editor .block-editor-link-control__drawer-toggle {
+  display: none !important;
+}
+
+.details-dropdown-editor .block-editor-link-control__tools {
+  margin: 0;
+  padding: 0;
+}
+
+.details-dropdown-editor .components-base-control.components-checkbox-control {
+  padding: 0;
+}
+
+/* Suchvorschläge Rahmen */
+.details-dropdown-editor .details-link-control-wrapper .block-editor-link-control__search-results-wrapper {
+  margin-top: 0.5em;
+  border: 1px solid var(--details-border-color-light);
+  padding-top: 0.5em;
+  max-width: 300px;
+  position: relative;
+}
+
+/* Suchvorschlag Inhalt */
+.details-dropdown-editor .details-link-control-wrapper .block-editor-link-control__search-item.is-current.is-preview {
+  padding: 0;
+}
+
+/* Suchvorschlag Schrift */
+.details-dropdown-editor .details-link-control-wrapper .block-editor-link-control__search-item .block-editor-link-control__search-item-title span {
+  font-size: medium;
+}
+
+/* Entfernen-Button */
+.details-dropdown-editor button.details-remove-button.components-button {
+  background: none !important;
+  color: var(--details-color-red) !important;
+  box-shadow: inset 0 0 0 1px var(--details-color-red) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: var(--details-border-radius);
+  padding: 6px 12px 6px 8px;
+}
+
+/* Entfernen-Button Hover */
+.details-dropdown-editor button.details-remove-button.components-button:hover {
+  background: #fbeaea !important;
+  color: #a00 !important;
+  box-shadow: inset 0 0 0 1px #a00 !important;
+}
+
+/* Aktionen (Verschieben und Entfernen) */
+.details-dropdown-editor .details-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+/* Verschieben-Button */
+.details-dropdown-editor .details-drag-button {
+  background-color: var(--details-color-blue);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: var(--details-border-radius);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  cursor: grab;
+}
+
+.details-dropdown-editor .details-drag-button:hover {
+  color: #fff;
+  opacity: 0.9;
+}
+
+/* Buttons unten zum Hinzufügen */
+.details-dropdown-editor .details-add-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.details-dropdown-editor .details-add-buttons button {
+  border-radius: var(--details-border-radius);
+}
+
+.details-dropdown-editor .details-editor-summary-text {
+  margin-right: 10px;
+}
+
+.details-dropdown-editor .details-editor-summary-icon {
+  display: inline-block;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.details-dropdown-editor .details-editor-summary {
+  cursor: pointer;
+}
+
+/* Wenn geöffnet, drehe Chevron */
+.details-dropdown-editor .details-editor-summary-icon.open {
+  transform: rotate(90deg); /* oder 180deg, je nach Wunsch */
+}
+
+/*# sourceMappingURL=editor-style.css.map*/

@@ -1,11 +1,10 @@
 {
   "name": "details-dropdown-block-ud",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Ein Gutenberg-Block für aufklappbare Details mit PDF- und Link-Optionen, entwickelt von ulrich.digital.",
-  "main": "index.js",
   "scripts": {
-    "build": "wp-scripts build",
-    "start": "wp-scripts start"
+        "build": "webpack --config webpack.config.js",
+        "start": "webpack --watch --config webpack.config.js"
   },
   "author": "ulrich.digital",
   "license": "GPL-2.0-or-later",
