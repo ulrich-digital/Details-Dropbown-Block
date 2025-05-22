@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
       wrapper.classList.add("is-visible");
     } else {
       wrapper.classList.remove("is-visible");
-      console.log("wrapper bleibt unsichtbar");
+      //console.log("wrapper bleibt unsichtbar");
     }
   });
 });
