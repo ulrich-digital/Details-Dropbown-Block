@@ -8,7 +8,7 @@
   \********************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":2,"name":"ud/details-dropdown","title":"Details Dropdown","category":"widgets","icon":"list-view","description":"Ein Block für aufklappbare Details mit PDF und Links.","editorStyle":"file:./build/editor-style.css","style":"file:./build/frontend-style.css","editorScript":"file:./build/editor-script.js","script":"file:./build/frontend-script.js","attributes":{"items":{"type":"array","default":[]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":2,"name":"ud/details-dropdown","title":"Details Dropdown","category":"text","icon":"list-view","description":"Ein Block für aufklappbare Details mit PDF und Links.","editorStyle":"file:./build/editor-style.css","style":"file:./build/frontend-style.css","editorScript":"file:./build/editor-script.js","script":"file:./build/frontend-script.js","supports":{"html":false},"attributes":{"items":{"type":"array","default":[]},"hasContent":{"type":"boolean","default":false}}}');
 
 /***/ }),
 
@@ -5343,28 +5343,48 @@ const Edit = ({
   clientId
 }) => {
   const {
-    items
+    items = []
   } = attributes;
   const [isOpen, setIsOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
-  const ALLOWED_BLOCKS = ["core/heading", "core/paragraph", "core/list"];
-  const TEMPLATE = [["core/heading", {
-    level: 3,
-    placeholder: "Überschrift"
+  const TEMPLATE = [["core/paragraph", {
+    placeholder: "Titel, Absatz oder Liste einfügen (optional)"
+  }, [], {
+    lock: {
+      remove: true
+    }
   }]];
-  const blockRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useRef)();
 
   /* =============================================================== *\
      Prüft, ob InnerBlocks Content enthalten → wird an hasContent übergeben
   \* =============================================================== */
-  const hasInnerBlockContent = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+
+  const hasRealInnerBlockContent = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
     const block = select("core/block-editor").getBlock(clientId);
-    return block?.innerBlocks?.length > 0;
+    if (!block || !block.innerBlocks) return false;
+    return block.innerBlocks.some(inner => {
+      const {
+        name,
+        attributes
+      } = inner;
+      if (!attributes) return false;
+
+      // Paragraph und Heading → content (Text)
+      if ((name === "core/paragraph" || name === "core/heading") && attributes.content) {
+        return attributes.content.trim().length > 0;
+      }
+
+      // List → values (Array of items)
+      if (name === "core/list" && Array.isArray(attributes.values)) {
+        return attributes.values.length > 0;
+      }
+      return false;
+    });
   }, [clientId]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     setAttributes({
-      hasContent: hasInnerBlockContent
+      hasContent: hasRealInnerBlockContent
     });
-  }, [hasInnerBlockContent]);
+  }, [hasRealInnerBlockContent]);
 
   // Neue PDF-Zeile hinzufügen
   const addPDF = () => {
@@ -5450,11 +5470,11 @@ const Edit = ({
     }), isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "details-richtext-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
-        allowedBlocks: ALLOWED_BLOCKS,
         template: TEMPLATE,
-        templateLock: false
+        templateLock: false,
+        allowedBlocks: ["core/paragraph", "core/list", "core/heading"]
       })
-    }), isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.DndContext, {
+    }), isOpen && items.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.DndContext, {
       collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.closestCenter,
       onDragEnd: handleDragEnd,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__.SortableContext, {
@@ -5592,41 +5612,48 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Save = ({
-  attributes
+  attributes = {}
 }) => {
   const {
-    items,
-    hasContent
+    items = [],
+    hasContent = false
   } = attributes;
-  if ((!items || items.length === 0) && !hasContent) {
-    return null;
-  }
+  const hasValidLinks = items.some(item => item?.url && item?.title // ← ACHTUNG: UND statt ODER, sonst bekommst du „halbleere“ Links
+  );
+  const textClass = `details-richtext-content${hasContent ? " has_content" : ""}`;
+  const listClass = `linkliste${hasValidLinks ? " has_content" : ""}`;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "details-dropdown-frontend",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "details-toggle",
-      "data-toggle": true,
+      "data-toggle": "true",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
         className: "details-toggle-text",
         children: "Details"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "details-content",
-      "data-content": true,
+      "data-content": "true",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: "details-richtext-content",
+        className: textClass,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
-        className: "linkliste",
-        children: items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: item.url,
-            target: item.type === "pdf" || item.isExternal ? "_blank" : "_self",
-            rel: "noopener noreferrer",
-            className: [item.type === "pdf" ? "link--pdf" : "", item.isExternal ? "link--external" : "link--internal"].join(" ").trim(),
-            children: item.title || item.url
-          })
-        }, item.id))
+        className: listClass,
+        children: items.map(item => {
+          if (!item?.url || !item?.title) return null;
+          const target = item.type === "pdf" || item.isExternal ? "_blank" : "_self";
+          const rel = "noopener noreferrer";
+          const classes = [item.type === "pdf" ? "link--pdf" : "", item.isExternal ? "link--external" : "link--internal"].join(" ").trim();
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+              href: item.url,
+              target: target,
+              rel: rel,
+              className: classes,
+              children: item.title
+            })
+          }, item.id);
+        })
       })]
     })]
   });

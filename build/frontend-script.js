@@ -50,16 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
        Rich Content prüfen und leere Kinder entfernen
     \* =============================================================== */
     if (richContent) {
-      Array.from(richContent.children).forEach(child => {
+      const children = Array.from(richContent.children);
+      const hasNonEmptyChild = children.some(child => {
         const isEmpty = child.innerHTML.trim() === "" && child.textContent.trim() === "";
-        if (isEmpty) {
-          child.remove();
-        }
+        return !isEmpty;
       });
-      if (richContent.children.length > 0) {
+      if (hasNonEmptyChild) {
         hasRichContent = true;
-      } else {
-        richContent.remove();
       }
     }
 
@@ -71,13 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const anchor = li.querySelector("a[href]");
         const linkText = li.textContent.trim();
         if (!anchor || linkText === "") {
-          li.remove();
+          //				li.remove();
         }
       });
       if (linkList.querySelectorAll("li").length > 0) {
         hasLinks = true;
       } else {
-        linkList.remove();
+        //			linkList.remove();
       }
     }
 

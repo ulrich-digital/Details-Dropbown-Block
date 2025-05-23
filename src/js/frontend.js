@@ -50,23 +50,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		/* =============================================================== *\
 		   Rich Content prüfen und leere Kinder entfernen
 		\* =============================================================== */
-		if (richContent) {
-			Array.from(richContent.children).forEach((child) => {
-				const isEmpty =
-					child.innerHTML.trim() === "" &&
-					child.textContent.trim() === "";
+if (richContent) {
+	const children = Array.from(richContent.children);
+	const hasNonEmptyChild = children.some((child) => {
+		const isEmpty =
+			child.innerHTML.trim() === "" &&
+			child.textContent.trim() === "";
+		return !isEmpty;
+	});
 
-				if (isEmpty) {
-					child.remove();
-				}
-			});
+	if (hasNonEmptyChild) {
+		hasRichContent = true;
+	}
+}
 
-			if (richContent.children.length > 0) {
-				hasRichContent = true;
-			} else {
-				richContent.remove();
-			}
-		}
 
 		/* =============================================================== *\
 		   Linkliste prüfen und leere <li> entfernen
@@ -76,14 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				const anchor = li.querySelector("a[href]");
 				const linkText = li.textContent.trim();
 				if (!anchor || linkText === "") {
-					li.remove();
+	//				li.remove();
 				}
 			});
 
 			if (linkList.querySelectorAll("li").length > 0) {
 				hasLinks = true;
 			} else {
-				linkList.remove();
+	//			linkList.remove();
 			}
 		}
 

@@ -9,11 +9,14 @@
   --details-color-red: var(--wp--preset--color--vivid-red, #d63638);
   --details-border-color: #ccc;
   --details-border-color-light: #111111;
-  --details-font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --details-font-family: -apple-system, system-ui, "Segoe UI", Roboto,
+  	Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-family: var(--details-font-family);
-  padding: 20px 10px 0.5em 10px;
+  padding: 5px 10px;
   width: 100%;
   box-sizing: border-box;
+  background-color: white;
+  border-radius: calc(2 * var(--details-border-radius));
 }
 
 /* Einzelnes Item */

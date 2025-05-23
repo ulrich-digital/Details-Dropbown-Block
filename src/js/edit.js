@@ -14,9 +14,8 @@ import {
 	InnerBlocks,
 } from "@wordpress/block-editor";
 import { Button, TextControl } from "@wordpress/components";
-import { useEffect, useRef, useState, Fragment } from "@wordpress/element";
+import { useEffect, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
-
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
 	SortableContext,
@@ -28,28 +27,53 @@ import SortableItem from "./utils/SortableItem";
 
 // Hauptkomponente für den Edit-Modus des Blocks
 const Edit = ({ attributes, setAttributes, clientId }) => {
-	const { items } = attributes;
+	const { items = [] } = attributes;
 	const [isOpen, setIsOpen] = useState(false);
-	const ALLOWED_BLOCKS = ["core/heading", "core/paragraph", "core/list"];
 	const TEMPLATE = [
-		["core/heading", { level: 3, placeholder: "Überschrift" }],
+		[
+			"core/paragraph",
+			{ placeholder: "Titel, Absatz oder Liste einfügen (optional)" },
+			[],
+			{ lock: { remove: true } },
+		],
 	];
-	const blockRef = useRef();
 
 	/* =============================================================== *\
 	   Prüft, ob InnerBlocks Content enthalten → wird an hasContent übergeben
 	\* =============================================================== */
-	const hasInnerBlockContent = useSelect(
+
+	const hasRealInnerBlockContent = useSelect(
 		(select) => {
 			const block = select("core/block-editor").getBlock(clientId);
-			return block?.innerBlocks?.length > 0;
+			if (!block || !block.innerBlocks) return false;
+
+			return block.innerBlocks.some((inner) => {
+				const { name, attributes } = inner;
+
+				if (!attributes) return false;
+
+				// Paragraph und Heading → content (Text)
+				if (
+					(name === "core/paragraph" || name === "core/heading") &&
+					attributes.content
+				) {
+					return attributes.content.trim().length > 0;
+				}
+
+				// List → values (Array of items)
+				if (name === "core/list" && Array.isArray(attributes.values)) {
+					return attributes.values.length > 0;
+				}
+
+				return false;
+			});
 		},
 		[clientId],
 	);
 
 	useEffect(() => {
-		setAttributes({ hasContent: hasInnerBlockContent });
-	}, [hasInnerBlockContent]);
+		setAttributes({ hasContent: hasRealInnerBlockContent });
+	}, [hasRealInnerBlockContent]);
 
 	// Neue PDF-Zeile hinzufügen
 	const addPDF = () => {
@@ -135,15 +159,19 @@ const Edit = ({ attributes, setAttributes, clientId }) => {
 			{isOpen && (
 				<div className="details-richtext-container">
 					<InnerBlocks
-						allowedBlocks={ALLOWED_BLOCKS}
 						template={TEMPLATE}
 						templateLock={false}
+						allowedBlocks={[
+							"core/paragraph",
+							"core/list",
+							"core/heading",
+						]}
 					/>
 				</div>
 			)}
 
 			{/* Sortierbare Liste der Einträge */}
-			{isOpen && (
+			{isOpen && items.length > 0 && (
 				<DndContext
 					collisionDetection={closestCenter}
 					onDragEnd={handleDragEnd}

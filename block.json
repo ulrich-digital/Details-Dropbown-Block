@@ -2,18 +2,24 @@
     "apiVersion": 2,
     "name": "ud/details-dropdown",
     "title": "Details Dropdown",
-    "category": "widgets",
+    "category": "text",
     "icon": "list-view",
     "description": "Ein Block für aufklappbare Details mit PDF und Links.",
-     "editorStyle": "file:./build/editor-style.css",
+    "editorStyle": "file:./build/editor-style.css",
     "style": "file:./build/frontend-style.css",
     "editorScript": "file:./build/editor-script.js",
     "script": "file:./build/frontend-script.js",
-
+    "supports": {
+        "html": false
+    },
     "attributes": {
         "items": {
             "type": "array",
             "default": []
+        },
+        "hasContent": {
+            "type": "boolean",
+            "default": false
         }
     }
 }

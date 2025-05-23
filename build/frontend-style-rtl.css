@@ -7,10 +7,12 @@
 \* =============================================================== */
 .details-dropdown-frontend {
   display: none;
+  visibility: hidden;
 }
 
 .details-dropdown-frontend.is-visible {
   display: block;
+  visibility: initial;
 }
 
 .details-dropdown-frontend .details-toggle {
@@ -78,6 +80,15 @@
   font-size: 100%;
 }
 
+.details-dropdown-frontend .details-content .details-richtext-content {
+  display: none;
+}
+
+.details-dropdown-frontend .details-content .details-richtext-content.has_content {
+  display: flex;
+  flex-direction: column;
+}
+
 .details-dropdown-frontend .details-content .details-richtext-content > * {
   font-size: 75%;
 }
@@ -96,6 +107,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.25em 0.5em;
+  display: none;
+}
+
+.details-dropdown-frontend .details-content ul.linkliste.has_content {
+  display: flex;
 }
 
 /* LI - Einzelne Listenelemente */
